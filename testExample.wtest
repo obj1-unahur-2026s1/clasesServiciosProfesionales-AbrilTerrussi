@@ -1,9 +1,51 @@
-import example.pepita
+import etapa1.*
 
-describe "group of tests for pepita" {
+describe "test para la etapa1" {
+  //Universidades
+  const sanMartin = new Universidad (provinciaDeOrigen = "Buenos Aires", honorariosPorHoraRecomendados = 3500)
+  const rosario = new Universidad (provinciaDeOrigen = "Santa Fe", honorariosPorHoraRecomendados = 2800)
+  const corrientes = new Universidad (provinciaDeOrigen = "Corrientes", honorariosPorHoraRecomendados = 4200)
+  const hurlingham = new Universidad (provinciaDeOrigen = "Buenos Aires", honorariosPorHoraRecomendados = 8800)
+  
+  //Profesionales
+  const juana = new ProfesionalVinculadoAUniversidad(universidad = rosario)
+  const melina = new ProfesionalAsociadosDelLitoral (universidad = corrientes)
+  const rocio = new ProfesionalLibre (universidad = hurlingham , honorariosRecomendados = 5000 , provinciaEnQuePuedeTrabajar = #{"Santa Fe", "Cordoba","Buenos Aires"})
+  const luciana = new ProfesionalLibre (universidad = rosario , honorariosRecomendados = 3200 , provinciaEnQuePuedeTrabajar = #{"Santa Fe", "Entre Rios"})
 
-  test "pepita has initial energy" {
-    assert.equals(100, pepita.energy())
+  //empressa
+  const empresa1 = new EmpresaDeServicio (honorarioDeReferencia = 3500)
+
+  method initialize(){
+    empresa1.contratarProfesional(juana)
+    empresa1.contratarProfesional(melina)
+    empresa1.contratarProfesional(rocio)
+    empresa1.contratarProfesional(luciana)
+  }
+  test "Dos profesionales estudiaron en Rosario" {
+    assert.equals(2, empresa1.cantidadQuestudiaronEnUniversidad(rosario))
+  }
+  test "1 profesional estudio en Hurligham"{
+    assert.equals(1, empresa1.cantidadQuestudiaronEnUniversidad(hurlingham))
+  }
+  test "ningun profesional estudio en San Martin"{
+    assert.equals(0, empresa1.cantidadQuestudiaronEnUniversidad(sanMartin))
   }
 
+  test "rocio es el unico proesional caro"{
+    assert.equals(#{rocio}, empresa1.profesionalesMasCaros())
+  }
+
+  test "universidades formadoras son Rosario, corrientes y hurlingham"{
+    assert.equals(#{rosario, corrientes, hurlingham}, empresa1.universidadesFormadoras())
+  }
+
+  test "el profesional mas barato"{
+    assert.equals(juana, empresa1.profesionalMasBarato())
+  }
+
+  test "es empresa de gente acotada"{
+    assert.that(empresa1.esDeGenteAcotada())
+  }
 }
+
