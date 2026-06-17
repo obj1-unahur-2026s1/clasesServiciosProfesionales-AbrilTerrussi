@@ -1,5 +1,6 @@
-import etapa1.*
-
+import universidad.*
+import empresas.*
+import profesionales.*
 describe "test para la etapa1" {
   //Universidades
   const sanMartin = new Universidad (provinciaDeOrigen = "Buenos Aires", honorariosPorHoraRecomendados = 3500)
