@@ -56,4 +56,4 @@ class ProfesionalLibre{
     method pasarDineroA(profesionalLibre, unImporte){
         profesionalLibre.totalRecaudado() + unImporte
     }
-}
+}//prubeagit
